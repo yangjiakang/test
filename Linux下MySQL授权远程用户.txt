@@ -1,0 +1,46 @@
+使用mysql命令进入mysql，mysql -uroot -p，然后输入密码。
+
+
+授权远程访问操作如下三步：
+
+
+1.use mysql;
+
+
+2.grant all privileges on *.* to 'root'@'%' identified by 'password';
+
+
+3.flush privileges;
+
+
+
+
+取消授权远程访问操作如下：
+
+
+1.use mysql;
+
+
+2.revoke all privileges on *.* from 'root'@'%';
+
+
+3.flush privileges;
+
+
+设置远程允许远程登录。
+
+（1）使用mysql -u root -p登录mysql
+
+（2）执行grant all privileges on *.* to 'root'@'%' identified by '111111';
+
+  (3) flush privileges;
+
+这时我们使用Navicat登录会发现无法连接，这是因为未开放3306端口的原因
+
+（4）开放3306端口
+
+firewall-cmd --add-port=3306/tcp --permanent
+
+firewall-cmd --add-port=3306/udp --permanent
+
+firewall-cmd --reload
